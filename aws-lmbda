@@ -4,7 +4,7 @@
 import boto3
 import json
 region = 'ap-south-1'
-instances = ['i-05cbc6e9f55cf50d9','i-08941ef80d319d971']
+instances = ['i-05cbc6e9ffqwerty','i-fghjkldfghjkl']
 ec2 = boto3.client('ec2', region_name=region)
 
 ec2_resource = boto3.resource('ec2', region_name=region)
@@ -41,7 +41,7 @@ region = 'ap-south-1'
 ec2 = boto3.client('ec2', region_name=region)
 ec2_resource = boto3.resource('ec2', region_name=region)
 
-instances = ['i-05cbc6e9f55cf50d9','i-08941ef80d319d971']
+instances = ['i-lkjhgfd','i-fghjkl;']
 
 def lambda_handler(event, context):
     try:
