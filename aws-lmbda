@@ -1,3 +1,60 @@
+import json
+import boto3
+import sys
+from datetime import datetime, timedelta
+from datetime import date
+import urllib3
+
+def trans_vertica():
+     client = boto3.client('cloudwatch')
+     response = client.get_metric_statistics(
+            Namespace='AWS/EC2',
+            MetricName='CPUUtilization',
+            Dimensions=[
+                {
+                'Name': 'InstanceId',
+                'Value': 'i-07627f8efd3f5b6fa'
+                },
+            ],
+            StartTime = datetime.utcnow() - timedelta(minutes = 5),
+            EndTime = datetime.utcnow(),
+            Period=60000,
+            Statistics=[
+                'Maximum',
+            ],
+            Unit='Percent'
+        )
+        
+     l = []
+     for i in response['Datapoints']:
+            l.append(i)
+    #  return json.dumps(int(l[0]['Maximum']), default=str)
+     
+     if int(l[0]['Maximum']) >= 65 :
+          cpu = "CPU Utilization of Trans Vertica IS : " + str(int(l[0]['Maximum']))
+    #  return cpu
+          http = urllib3.PoolManager()
+          data = {"text": cpu}
+          r = http.request("POST","https://hooks.slack.com/services/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", 
+                        body = json.dumps(data),
+                        headers = {"Content-Type":"application/json"})
+#########################################################################################################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #start or stop servers on the basis of their runnning state
 
 
