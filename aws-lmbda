@@ -34,8 +34,7 @@ def trans_vertica():
           cpu = "CPU Utilization of Trans Vertica IS : " + str(int(l[0]['Maximum']))
     #  return cpu
           http = urllib3.PoolManager()
-          data = {"text": cpu}
-          r = http.request("POST","https://hooks.slack.com/services/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", 
+          data = {"text": slack url, 
                         body = json.dumps(data),
                         headers = {"Content-Type":"application/json"})
 #########################################################################################################################
